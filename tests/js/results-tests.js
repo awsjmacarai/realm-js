@@ -702,7 +702,7 @@ module.exports = {
 
         var realm = new Realm({schema: [schemas.NullableBasicTypes]});
 
-            // date column
+        // date column
         realm.write(() => {
             for(var i = 0; i < N; i++) {
                 realm.create('NullableBasicTypesObject', {
@@ -827,5 +827,11 @@ module.exports = {
                 results.update('unknownCol', 'world');
             });
         });
+
+        TestCase.assertThrows(function() {
+            results.update('stringCol', 'world');
+        });
+
+        realm.close();
     }
 };
